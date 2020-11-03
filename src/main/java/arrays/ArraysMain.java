@@ -11,7 +11,7 @@ public class ArraysMain {
     }
 
     /*List<String> daysOfWeek(){
-
+        ?????????
     }*/
 
     String multiplicationTableAsString(int size) {
