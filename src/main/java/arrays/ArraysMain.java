@@ -5,7 +5,7 @@ import java.util.List;
 
 public class ArraysMain {
 
-    String numberOfDaysAsString() {
+    public String numberOfDaysAsString() {
         int[] numberOfDays = {31, 30, 31, 30, 31, 30, 30, 31, 30, 31, 30, 31};
         return Arrays.toString(numberOfDays);
     }
@@ -14,7 +14,7 @@ public class ArraysMain {
         ?????????
     }*/
 
-    String multiplicationTableAsString(int size) {
+    public String multiplicationTableAsString(int size) {
         int[][] multiplicationTable = new int[size][size];
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
@@ -24,11 +24,11 @@ public class ArraysMain {
         return Arrays.deepToString(multiplicationTable);
     }
 
-    boolean sameTempValues(double[] day, double[] anotherDay) {
+    public boolean sameTempValues(double[] day, double[] anotherDay) {
         return Arrays.equals(day, anotherDay);
     }
 
-    boolean wonLottery(int[] ticket, int[] lottery) {
+    public boolean wonLottery(int[] ticket, int[] lottery) {
         int[] ownTicket = Arrays.copyOf(ticket, ticket.length);
         int[] ownLottery = Arrays.copyOf(lottery, lottery.length);
         Arrays.sort(ownTicket);
@@ -36,11 +36,11 @@ public class ArraysMain {
         return Arrays.equals(ownTicket, ownLottery);
     }
 
-    int min(int a, int b) {
+    private int min(int a, int b) {
         return a < b ? a : b;
     }
 
-    boolean sameTempValuesDaylight(double[] day, double[] anotherDay) {
+    public boolean sameTempValuesDaylight(double[] day, double[] anotherDay) {
 
         return Arrays.equals(Arrays.copyOfRange(day       , 0, min(day.length, anotherDay.length)),
                              Arrays.copyOfRange(anotherDay, 0, min(day.length, anotherDay.length)));
