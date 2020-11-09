@@ -19,8 +19,8 @@ public class PrimitiveTypes {
     }*/
 
     public String toBinaryString(int n) {
-        String nString ="";
-        for (int i = Math.abs(n); i > 0 ; ) {
+        String nString = "";
+        for (int i = Math.abs(n); i > 0; ) {
             nString = Integer.toString(i % 2) + nString;
             i = i / 2;
         }
@@ -31,7 +31,4 @@ public class PrimitiveTypes {
         }
         return nString;
     }
-
-
-
 }
