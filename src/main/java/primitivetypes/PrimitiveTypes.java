@@ -1,4 +1,4 @@
-package primitiveTypes;
+package primitivetypes;
 
 public class PrimitiveTypes {
     final static int BITLENGTH = 32;

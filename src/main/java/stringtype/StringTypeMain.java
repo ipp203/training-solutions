@@ -1,6 +1,6 @@
 package stringtype;
 
-public class stringTypeMain {
+public class StringTypeMain {
     public static void main(String[] args) {
         String prefix = "Hello";
         String name = "Jhon Doe";
