@@ -19,8 +19,8 @@ public class Vet {
         return false;
     }
 
-    public void add(Pet newPet){
-        if (!areEquals(newPet)){
+    public void add(Pet newPet) {
+        if (!areEquals(newPet)) {
             pets.add(newPet);
         }
     }
