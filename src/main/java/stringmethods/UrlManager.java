@@ -82,7 +82,7 @@ public class UrlManager {
     private String[] getQueryValues(String query) {
         String[] keys = query.split("&");
         for (int i = 0; i < keys.length; i++) {
-            keys[i] = keys[i].substring(keys[i].indexOf('=')+1);
+            keys[i] = keys[i].substring(keys[i].indexOf('=') + 1);
         }
         return keys;
     }
@@ -112,10 +112,10 @@ public class UrlManager {
         portIndex = hostIndex;
         if (url.charAt(hostIndex) == ':') {
             String s;
-            if (url.indexOf('/', hostIndex)>=0) {
-                s = url.substring(hostIndex + 1,url.indexOf('/', hostIndex) );
-            }else{
-                s = url.substring(hostIndex + 1 );
+            if (url.indexOf('/', hostIndex) >= 0) {
+                s = url.substring(hostIndex + 1, url.indexOf('/', hostIndex));
+            } else {
+                s = url.substring(hostIndex + 1);
             }
             portIndex = hostIndex + 1 + s.length();
             return Integer.parseInt(s);
@@ -130,7 +130,7 @@ public class UrlManager {
     }
 
     private String getQueryFromUrl(String url) {
-        return url.substring(Math.min(url.length(),pathIndex+1));
+        return url.substring(Math.min(url.length(), pathIndex + 1));
     }
 
     private boolean isEmptyString(String str) {
