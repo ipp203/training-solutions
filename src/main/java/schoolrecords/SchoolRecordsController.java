@@ -31,12 +31,12 @@ public class SchoolRecordsController {
         Random rnd = new Random(2);
 
         classRecords = new ClassRecords("2/c", new Random());
-        for (int i = 0; i < students.length; i++) {
+        for (Student student : students) {
             for (int j = 0; j < 4; j++) {
-                students[i].grading(new Mark(MarkType.values()[rnd.nextInt(5)],
+                student.grading(new Mark(MarkType.values()[rnd.nextInt(5)],
                         subjects[rnd.nextInt(6)], tutors[rnd.nextInt(3)]));
             }
-            classRecords.addStudent(students[i]);
+            classRecords.addStudent(student);
         }
     }
 
@@ -58,7 +58,7 @@ public class SchoolRecordsController {
     }
 
     private MarkType inputMarkType() {
-        int m = 0;
+        int m;
         Scanner scn = new Scanner(System.in);
 
         while (true) {
@@ -86,9 +86,9 @@ public class SchoolRecordsController {
         System.out.println("Kérem a tárgy nevét: ");
         while (true) {
             name = scn.nextLine();
-            for (int i = 0; i < subjects.length; i++) {
-                if (subjects[i].getSubjectName().equals(name.trim())) {
-                    return subjects[i];
+            for (Subject subject : subjects) {
+                if (subject.getSubjectName().equals(name.trim())) {
+                    return subject;
                 }
             }
             System.out.println("Nincs ilyen tantárgy, kérem újra:");
@@ -102,9 +102,9 @@ public class SchoolRecordsController {
         System.out.println("Kérem a tanár nevét: ");
         while (true) {
             name = scn.nextLine();
-            for (int i = 0; i < tutors.length; i++) {
-                if (tutors[i].getName().equals(name.trim())) {
-                    return tutors[i];
+            for (Tutor tutor : tutors) {
+                if (tutor.getName().equals(name.trim())) {
+                    return tutor;
                 }
             }
             System.out.println("Nincs ilyen tanár, kérem újra:");
@@ -114,7 +114,7 @@ public class SchoolRecordsController {
     private Student inputStudent() {
         String name;
         Scanner scn = new Scanner(System.in);
-        Student student = null;
+        Student student;
 
         System.out.println("Kérem, adja meg a diák nevét!");
         while (true) {
@@ -141,11 +141,17 @@ public class SchoolRecordsController {
 
         System.out.println("Osztály nyilvántartó");
 
-        int i = 0;
+        int i;
         do {
             src.printMenu();
-            i = scn.nextInt();
+
+            try {
+                i = scn.nextInt();
+            } catch (InputMismatchException ime) {
+                i = 0;
+            }
             scn.nextLine();
+
             switch (i) {
                 case 1:
                     System.out.println(src.classRecords.getClassName() + " osztály tanulói:\n" + src.classRecords.listStudentNames());
