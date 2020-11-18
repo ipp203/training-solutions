@@ -42,8 +42,12 @@ public class NumberGuesser {
             }
 
         }
-        while (!ng.isEqual(number));
-        System.out.println("Talált a/az " + i + ". lépésben");
+        while (!ng.isEqual(number) && i < 6);
+        if (ng.isEqual(number)) {
+            System.out.println("Talált a/az " + i + ". lépésben");
+        } else {
+            System.out.println("Sajnos nem talált");
+        }
 
 
     }
