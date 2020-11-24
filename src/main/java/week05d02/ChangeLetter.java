@@ -15,13 +15,21 @@ public class ChangeLetter {
 
         StringBuilder result = new StringBuilder();
 
-        for (int i = 0; i < str.length(); i++) {
+        for (char c : str.toCharArray()) {
+            if (VOWELS.indexOf(c) >= 0) {
+                result.append(STAR);
+            } else {
+                result.append(c);
+            }
+        }
+
+/*        for (int i = 0; i < str.length(); i++) {
             if (VOWELS.indexOf(str.charAt(i)) >= 0) {
                 result.append(STAR);
             } else {
                 result.append(str.charAt(i));
             }
-        }
+        }*/
         return result.toString();
     }
 }
