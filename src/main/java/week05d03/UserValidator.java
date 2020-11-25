@@ -16,7 +16,7 @@ public class UserValidator {
                 throw new RuntimeException("A " + user.getName() + ". felhasználó kora negatív.");
             }
             if (user.getAge() > 120) {
-                throw new RuntimeException("A " + user.getName() + ". felhasználó neve üres.");
+                throw new RuntimeException("A " + user.getName() + ". felhasználó kora nagyobb, mint 120.");
             }
         }
 
