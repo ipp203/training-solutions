@@ -18,5 +18,6 @@ class UserValidatorTest {
         users.add(new User("AAA", 150));
         users.add(new User("AAA", 50));
 
+        //assertEquals(,new UserValidator().validate(users));
     }
 }
