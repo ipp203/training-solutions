@@ -9,7 +9,7 @@ public class UserValidator {
         }
         for (int i = 0; i < users.size(); i++) {
             User user = users.get(i);
-            if (user.getName().isBlank()) {
+            if (user.getName() == null || user.getName().isBlank()) {
                 throw new RuntimeException("A " + i + ". felhasználó neve üres.");
             }
             if (user.getAge() < 0) {
