@@ -13,6 +13,16 @@ public class PlayList {
         this.songs = songs;
     }
 
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        for (Song song : songs) {
+            sb.append(song);
+            sb.append("\n");
+        }
+        return sb.toString();
+    }
+
     public List<Song> findByLengthGreraterThan(int mins) {
         List<Song> longSongs = new ArrayList<>();
         for (Song song : songs) {

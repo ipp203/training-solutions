@@ -10,7 +10,7 @@ public class Song {
             throw new IllegalArgumentException("Name and artist can not be empty!");
         }
         if (lengthInSeconds <= 0) {
-            throw new IllegalArgumentException("Length must bu greater than 0!");
+            throw new IllegalArgumentException("Length must be greater than 0!");
         }
         this.name = name;
         this.lengthInSeconds = lengthInSeconds;
