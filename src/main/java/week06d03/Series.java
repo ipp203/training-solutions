@@ -3,6 +3,9 @@ package week06d03;
 import java.util.List;
 
 public class Series {
+
+    enum SeriesType {DEC, INC, RANDOM}
+
     public SeriesType calculateSeriesType(List<Integer> series) {
         if (series == null || series.size() < 2) {
             throw new IllegalArgumentException("Size of series must be greater than 2!");
@@ -19,12 +22,12 @@ public class Series {
             }
         }
         if (novekvo) {
-            return SeriesType.NOVEKVO;
+            return SeriesType.INC;
         }
         if (csokkeno) {
-            return SeriesType.CSOKKENO;
+            return SeriesType.DEC;
         }
-        return SeriesType.OSSZE_VISSZA;
+        return SeriesType.RANDOM;
 
     }
 }
