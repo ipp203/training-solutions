@@ -1,6 +1,6 @@
-package isahasa.isa;
+package isahasa;
 
-public class HtmlText {
+public class HtmlText implements TextSource {
     String plainText;
 
     public HtmlText(String plainText) {

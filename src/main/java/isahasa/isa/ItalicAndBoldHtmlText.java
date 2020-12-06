@@ -1,5 +1,7 @@
 package isahasa.isa;
 
+import isahasa.HtmlText;
+
 public class ItalicAndBoldHtmlText extends HtmlText {
     public ItalicAndBoldHtmlText(String plainText) {
         super(plainText);
