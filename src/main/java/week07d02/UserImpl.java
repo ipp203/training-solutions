@@ -1,7 +1,9 @@
 package week07d02;
 
 public class UserImpl implements User {
-    String userName, firstName, lastName;
+    private String userName;
+    private String firstName;
+    private String lastName;
 
     public UserImpl(String userName, String firstName, String lastName) {
         if (isEmpty(userName) || isEmpty(firstName) || isEmpty(lastName)) {
