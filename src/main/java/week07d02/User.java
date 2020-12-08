@@ -11,8 +11,28 @@ public interface User {
         return getFirstName() + " " + getLastName();
     }
 
-    static User of(String userName, String firstName, String lastName) {
+/*    static User of(String userName, String firstName, String lastName) {
         return new UserImpl(userName, firstName, lastName);
+    }*/
+
+    static User of(String userName, String firstName, String lastName) {
+        return new User() {//anonymous innerclass
+            @Override
+            public String getUsername() {
+                return userName;
+            }
+
+            @Override
+            public String getFirstName() {
+                return firstName;
+            }
+
+            @Override
+            public String getLastName() {
+                return lastName;
+            }
+        };
     }
+
 
 }
