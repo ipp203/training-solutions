@@ -1,7 +1,5 @@
 package interfaceextends;
 
-import org.junit.jupiter.api.Test;
-
 public class Point {
     private final long x, y, z;
 
