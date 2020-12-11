@@ -3,10 +3,10 @@ package week04;
 import java.util.Random;
 import java.util.Scanner;
 
-public class NumberGuesser {
+public class GuessTheNumber {
     private int number;
 
-    public NumberGuesser() {
+    public GuessTheNumber() {
         number = new Random().nextInt(100) + 1;
     }
 
@@ -26,7 +26,7 @@ public class NumberGuesser {
     public static void main(String[] args) {
         Scanner scn = new Scanner(System.in);
         System.out.println("Számkitalálósdi.");
-        NumberGuesser ng = new NumberGuesser();
+        GuessTheNumber ng = new GuessTheNumber();
         int number = 0;
         int i = 0;
         do {

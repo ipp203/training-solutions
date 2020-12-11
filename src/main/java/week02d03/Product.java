@@ -20,7 +20,7 @@ public class Product {
     public boolean areTheyEqual(Product p) {
         int codesLength = code.length() - p.getCode().length();
         codesLength = codesLength > 0 ? codesLength : -codesLength;
-        return name.equals(p.getName()) && codesLength<=1;
+        return name.equals(p.getName()) && codesLength <= 1;
     }
 
     public static void main(String[] args) {

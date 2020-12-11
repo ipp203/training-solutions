@@ -28,16 +28,14 @@ public class Phone {
     }
 
     public static void main(String[] args) {
-      // Scanner scanner = new Scanner(System.in);
+        // Scanner scanner = new Scanner(System.in);
 
 
-       Phone phone1 = new Phone("type1",1234);
-       Phone phone2 = new Phone("type2",2345);
+        Phone phone1 = new Phone("type1", 1234);
+        Phone phone2 = new Phone("type2", 2345);
 
         System.out.println("Phone1 type: " + phone1.getType() + ", mem: " + phone1.getMem());
         System.out.println("Phone2 type: " + phone2.getType() + ", mem: " + phone2.getMem());
-
-
 
 
     }
