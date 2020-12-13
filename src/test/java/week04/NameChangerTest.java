@@ -1,6 +1,7 @@
 package week04;
 
 import org.junit.jupiter.api.Test;
+import week04.d01.NameChanger;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;

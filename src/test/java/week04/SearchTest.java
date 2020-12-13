@@ -3,6 +3,7 @@ package week04;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import week04.d02.Search;
 
 import java.util.Arrays;
 
