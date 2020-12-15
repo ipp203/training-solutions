@@ -1,6 +1,5 @@
 package week08.d02;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -11,7 +10,7 @@ class CountryStatisticsTest {
     void loadData() {
         CountryStatistics cs = new CountryStatistics();
 
-        cs.readCountryData("countries.txt");
+        cs.readCountryData("country.txt");
         assertEquals(11, cs.getCountryData().size());
 
     }
@@ -20,7 +19,7 @@ class CountryStatisticsTest {
     void getLargestPopulation() {
         CountryStatistics cs = new CountryStatistics();
 
-        cs.readCountryData("countries.txt");
+        cs.readCountryData("country.txt");
 
         assertEquals(79, cs.maxPopulation().getPopulation());
     }
