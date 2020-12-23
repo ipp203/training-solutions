@@ -1,4 +1,4 @@
-package week09d02;
+package week09.d02;
 
 public class FibCalculator {
 
