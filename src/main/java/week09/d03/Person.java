@@ -31,4 +31,9 @@ public class Person {
             present = Present.values()[rnd.nextInt(3) + 1];
         }
     }
+
+    @Override
+    public String toString() {
+        return name + ": " + present.getName() + " (" + age + ")'";
+    }
 }
