@@ -1,31 +1,34 @@
 package week10.d05;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Calculator {
-//Listaval
-    public CalculatorData findMinMaxSum1(int[] arr) {
-        List<Integer> arrList = new ArrayList<>();
-        for (int a : arr) {
-            arrList.add(a);
+    //Listaval
+    public void findMinMaxSum1(int[] arr) {
+        if (arr == null) {
+            throw new IllegalArgumentException("arr is null");
         }
-        arrList.sort(null);
+        int[] myArr = Arrays.copyOf(arr, arr.length);
+        Arrays.sort(myArr);
 
         int sumMin = 0;
         int sumMax = 0;
-        int numberOfData = Math.min(4, arr.length);
+        int numberOfData = Math.min(4, myArr.length);
         for (int i = 0; i < numberOfData; i++) {
-            sumMin += arrList.get(i);
-            sumMax += arrList.get(arrList.size() - i - 1);
+            sumMin += myArr[i];
+            sumMax += myArr[myArr.length - i - 1];
         }
-        return new CalculatorData(sumMin, sumMax);
+        System.out.println("MinSum: " + sumMin + " MaxSum: " + sumMax);
+
     }
 
-//gyalog
-    public CalculatorData findMinMaxSum2(int[] arr) {
-
+    //gyalog
+    public void findMinMaxSum2(int[] arr) {
+        if (arr == null) {
+            throw new IllegalArgumentException("arr is null");
+        }
+//minimum
         int sumMin = 0;
         int sumMax = 0;
         int length = Math.min(4, arr.length);
@@ -42,7 +45,7 @@ public class Calculator {
             sumMin += min;
             marksMin[minIndex] = true;
         }
-
+//maximum
         boolean[] marksMax = new boolean[arr.length];
         for (int i = 0; i < length; i++) {
             int max = Integer.MIN_VALUE;
@@ -56,7 +59,7 @@ public class Calculator {
             sumMax += max;
             marksMax[maxIndex] = true;
         }
-        return new CalculatorData(sumMin, sumMax);
+        System.out.println("MinSum: " + sumMin + " MaxSum: " + sumMax);
     }
 
 
@@ -64,15 +67,21 @@ public class Calculator {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Kérek egész számokat vesszővel elválasztva!");
         String line = scanner.nextLine();
+
         String[] data = line.split(",");
         int[] numbers = new int[data.length];
         int i = 0;
-        for (String s : data) {
-            numbers[i] = Integer.parseInt(s);
-            i++;
+        try {
+            for (String s : data) {
+                numbers[i] = Integer.parseInt(s);
+                i++;
+            }
+        } catch (NumberFormatException nfe) {
+            System.out.println("Wrong number format! " + nfe.getMessage());
+            return;
         }
         Calculator c = new Calculator();
-        System.out.println(c.findMinMaxSum1(numbers));
-        System.out.println(c.findMinMaxSum2(numbers));
+        c.findMinMaxSum1(numbers);
+        c.findMinMaxSum2(numbers);
     }
 }
