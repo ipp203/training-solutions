@@ -8,9 +8,10 @@ import java.util.Deque;
 import java.util.NoSuchElementException;
 
 public class JobQueue {
-    Deque<Job> d = new ArrayDeque<>();
+
 
     public Deque<Job> addJobByUrgency(Job... jobs) {
+        Deque<Job> d = new ArrayDeque<>();
         for (Job job : jobs) {
             if (job.isUrgent()) {
                 d.addFirst(job);
@@ -18,14 +19,14 @@ public class JobQueue {
                 d.addLast(job);
             }
         }
-        return new ArrayDeque<>(d);
+        return d;
     }
 
-    public Job dispatchUrgentJob(Deque<Job> jobs) throws NoJobException {
+    public Job dispatchUrgentJob(Deque<Job> jobs){
         try {
-            if (d.peekFirst().isUrgent()) {
+            if (jobs.peekFirst().isUrgent()) {
 
-                return d.getFirst();
+                return jobs.getFirst();
             } else {
                 throw new NoJobException("No any urgent job");
             }
@@ -34,11 +35,11 @@ public class JobQueue {
         }
     }
 
-    public Job dispatchNotUrgentJob(Deque<Job> jobs) throws NoJobException {
+    public Job dispatchNotUrgentJob(Deque<Job> jobs){
         try {
-            if (!d.peekLast().isUrgent()) {
+            if (!jobs.peekLast().isUrgent()) {
 
-                return d.getLast();
+                return jobs.getLast();
             } else {
                 throw new NoJobException("No any noturgent job");
             }

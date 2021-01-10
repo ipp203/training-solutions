@@ -3,24 +3,23 @@ package collectionsqueue.collectionspriorityqueue;
 import collectionsqueue.job.Job;
 import collectionsqueue.job.NoJobException;
 
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.NoSuchElementException;
 import java.util.PriorityQueue;
 import java.util.Queue;
 
 public class JobDispatcher {
-    PriorityQueue<Job> pq = new PriorityQueue<>();
+
 
     public Queue<Job> addJob(Job... jobs) {
-        for (Job job : jobs) {
-            pq.add(job);
-        }
-        return new PriorityQueue<>(pq);
+        PriorityQueue<Job> pq = new PriorityQueue<>();
+        Collections.addAll(pq,jobs);
+        return pq;
     }
 
-    public Job dispatchNextJob(Queue<Job> jobs) throws NoJobException {
+    public Job dispatchNextJob(Queue<Job> jobs) {
         try {
-            return pq.remove();
+            return jobs.remove();
         } catch (NoSuchElementException nse) {
             throw new NoJobException("No job available, get a rest!", nse);
         }
