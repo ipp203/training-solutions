@@ -15,7 +15,7 @@ public class CharCounter {
         for (String s : chars) {
             putStringIntoMap(s);
         }
-        for (Map.Entry entry : charMap.entrySet()) {
+        for (Map.Entry<Character, Integer> entry : charMap.entrySet()) {
             if (entry.getValue().equals(chars.length)) {
                 result++;
             }
