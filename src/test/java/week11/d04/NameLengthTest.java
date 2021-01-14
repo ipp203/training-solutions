@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -14,8 +15,9 @@ class NameLengthTest {
     void getLengthsTest() {
         NameLength nameLength = new NameLength();
         List<Integer> result = nameLength.getLengths(Arrays.asList("Joe", "Jack", "Jane", "Jake", "George", "William"));
-        assertEquals(2, result.size());
+        Collections.sort(result);
 
+        assertEquals(2, result.size());
         assertArrayEquals(new Integer[]{3, 4}, result.toArray());
     }
 
@@ -25,9 +27,10 @@ class NameLengthTest {
         List<Integer> result = nameLength.getLengths(new ArrayList<>());
         assertEquals(0, result.size());
 
-        result = nameLength.getLengths(Arrays.asList("Joe", "Jack", "Jane", "Jake", "George", ""));
-        assertEquals(2, result.size());
+        result = nameLength.getLengths(Arrays.asList("Joe", "Jack", "Jane", "Jake", "George", "", null));
+        Collections.sort(result);
 
+        assertEquals(2, result.size());
         assertArrayEquals(new Integer[]{3, 4}, result.toArray());
     }
 }

@@ -13,7 +13,7 @@ public class NameLength {
         }
         Set<Integer> result = new HashSet<>();
         for (String name : names) {
-            if (!name.isBlank() && name.charAt(0) == 'J') {
+            if (name!=null && !name.isBlank() && name.toUpperCase().charAt(0) == 'J') {
                 result.add(name.length());
             }
         }
