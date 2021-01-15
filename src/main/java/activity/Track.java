@@ -91,7 +91,7 @@ public class Track {
                 if (line.contains("<trkpt")) {
                     coordinate = lineToCoordinate(line);
                 }
-                if (line.contains("<ele") && coordinate!=null) {
+                if (line.contains("<ele") && coordinate != null) {
                     addTrackPoint(new TrackPoint(coordinate, lineToElevation(line)));
                     coordinate = null;
                 }
@@ -102,7 +102,7 @@ public class Track {
     }
 
     private Coordinate lineToCoordinate(String line) {
-        String data[] = line.split(Character.toString(34));
+        String[] data = line.split(Character.toString(34));
         double latitude = Double.parseDouble(data[1]);
         double longitude = Double.parseDouble(data[3]);
         return new Coordinate(latitude, longitude);
