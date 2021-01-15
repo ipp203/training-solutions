@@ -91,8 +91,9 @@ public class Track {
                 if (line.contains("<trkpt")) {
                     coordinate = lineToCoordinate(line);
                 }
-                if (line.contains("<ele")) {
+                if (line.contains("<ele") && coordinate!=null) {
                     addTrackPoint(new TrackPoint(coordinate, lineToElevation(line)));
+                    coordinate = null;
                 }
             }
         } catch (IOException ioe) {
