@@ -1,11 +1,9 @@
 package collectionsclass;
 
-import java.util.Objects;
-
 public class Book implements Comparable<Book> {
-    private int id;
-    private String author;
-    private String title;
+    private final int id;
+    private final String author;
+    private final String title;
 
     public Book(int id, String author, String title) {
         this.id = id;
