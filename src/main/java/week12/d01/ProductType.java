@@ -1,8 +1,9 @@
 package week12.d01;
 
+
 public class ProductType implements Comparable<ProductType> {
-    private int weight;
-    private int price;
+    private final int weight;
+    private final int price;
 
     public ProductType(int weight, int price) {
         this.weight = weight;
@@ -17,8 +18,12 @@ public class ProductType implements Comparable<ProductType> {
         return price;
     }
 
+    private double getRate() {
+        return (double) (price) / weight;
+    }
+
     @Override
     public int compareTo(ProductType o) {
-        return (int) ((double) price / weight - (double) o.price / o.weight);
+        return Double.compare(getRate(), o.getRate());
     }
 }
