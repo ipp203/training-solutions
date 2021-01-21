@@ -1,20 +1,26 @@
-package search;
+package collectionsequalshash;
 
 import java.util.Objects;
 
-public class Book implements Comparable<Book>{
-    private final int id;
-    private final String title;
-    private final String author;
+public class Book {
+    private String regNumber;
+    private String title;
+    private String author;
 
-    public Book(int regNumber, String author, String title) {
-        this.id = regNumber;
+    public Book(String regNumber, String title, String author) {
+        this.regNumber = regNumber;
         this.title = title;
         this.author = author;
     }
 
-    public int getId() {
-        return id;
+    public Book(String title, String author) {
+        this.title = title;
+        this.author = author;
+        this.regNumber = "";
+    }
+
+    public String getRegNumber() {
+        return regNumber;
     }
 
     public String getTitle() {
@@ -39,16 +45,11 @@ public class Book implements Comparable<Book>{
     }
 
     @Override
-    public int compareTo(Book o) {
-        if (this.author.equals(o.author)){
-            return this.title.compareTo(o.title);
-        }
-        return this.author.compareTo(o.author);
-    }
-
-    @Override
     public String toString() {
-        return "" + id +" " + author + " " + title;
+        return "Book{" +
+                "regNumber='" + regNumber + '\'' +
+                ", title='" + title + '\'' +
+                ", author='" + author + '\'' +
+                '}';
     }
 }
-
