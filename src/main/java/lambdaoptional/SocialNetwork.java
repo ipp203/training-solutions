@@ -21,7 +21,7 @@ public class SocialNetwork {
     }
 
     public Optional<Double> averageNumberOfSkills() {
-        if (members.size() == 0) {
+        if (members.isEmpty()) {
             return Optional.empty();
         }
         double sum = 0;
