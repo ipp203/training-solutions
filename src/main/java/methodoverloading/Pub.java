@@ -1,4 +1,4 @@
-package methoverloading;
+package methodoverloading;
 
 public class Pub {
     private String name;
