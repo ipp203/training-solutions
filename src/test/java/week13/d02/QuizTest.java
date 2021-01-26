@@ -9,17 +9,19 @@ import java.io.InputStreamReader;
 import static org.junit.jupiter.api.Assertions.*;
 
 class QuizTest {
-    Quiz quiz = new Quiz();
+    Quiz quiz;
 
     @BeforeEach
     void init() {
-        quiz.loadFromFile(new BufferedReader(new InputStreamReader(Quiz.class.getResourceAsStream("results.txt"))));
+        quiz = new Quiz();
+        quiz.loadFromFile(new BufferedReader(
+                new InputStreamReader(
+                        Quiz.class.getResourceAsStream("results.txt"))));
     }
-
 
     @Test
     void isGoodAnswer() {
-        assertEquals(true, quiz.isGoodAnswer("AB123", 0));
+        assertTrue(quiz.isGoodAnswer("AB123", 0));
     }
 
     @Test
