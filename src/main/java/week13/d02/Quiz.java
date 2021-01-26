@@ -41,11 +41,11 @@ public class Quiz {
     public String getWinner() {
         String code = "";
         int max = 0;
-        for (Map.Entry<String, List<Character>> entrie : resultMap.entrySet()) {
+        for (Map.Entry<String, List<Character>> entry : resultMap.entrySet()) {
 
-            int points = getPoints(entrie);
+            int points = getPoints(entry);
             if (max < points) {
-                code = entrie.getKey();
+                code = entry.getKey();
                 max = points;
             }
 
@@ -71,9 +71,9 @@ public class Quiz {
         resultMap.get(code).add(answer);
     }
 
-    private int getXCounter(Map.Entry<String, List<Character>> entrie) {
+    private int getXCounter(Map.Entry<String, List<Character>> entry) {
         int counter = 0;
-        for (Character c : entrie.getValue()) {
+        for (Character c : entry.getValue()) {
             if (c == 'X') {
                 counter++;
             }
@@ -81,12 +81,12 @@ public class Quiz {
         return counter;
     }
 
-    private int getPoints(Map.Entry<String, List<Character>> entrie) {
+    private int getPoints(Map.Entry<String, List<Character>> entry) {
         int counter = 0;
-        List<Character> list = entrie.getValue();
+        List<Character> list = entry.getValue();
 
         for (int i = 0; i < list.size(); i++) {
-            if (isGoodAnswer(entrie.getKey(), i)) {
+            if (isGoodAnswer(entry.getKey(), i)) {
                 counter += i + 1;
             } else {
                 if (list.get(i) != 'X') {
