@@ -7,16 +7,23 @@ public class Books {
 
     public Books(List<Book> books) {
         for (Book book : books) {
-            if (!authors.containsKey(book.getAuthor())) {
-                authors.put(book.getAuthor(), book.getNumberOfPages());
+            String key = book.getAuthor();
+            if (!authors.containsKey(key)) {
+                authors.put(key, book.getNumberOfPages());
             } else {
-                String key = book.getAuthor();
-                authors.put(key, authors.get(key) + book.getNumberOfPages());
+                int sum = authors.get(key);
+                authors.put(key, sum + book.getNumberOfPages());
             }
+            authors.merge(key,book.getNumberOfPages(),(x,y)->x+y);
         }
     }
 
-    public String getMostPagesAuthor() {
+    public Optional<String> getMostPagesAuthor() {
+
+        if (authors.isEmpty()){
+            return Optional.empty();
+        }
+
         String result = "";
         int maxPages = 0;
         for (Map.Entry<String, Integer> author : authors.entrySet()) {
@@ -25,6 +32,6 @@ public class Books {
                 result = author.getKey();
             }
         }
-        return result;
+        return Optional.of(result);
     }
 }
