@@ -6,12 +6,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EmploymentPeriod {
-    private List<Period> periods;
-
-    public EmploymentPeriod(List<Period> periods) {
-        this.periods = new ArrayList<>(periods);
-    }
+public class PensionCalculator {
+    private List<Period> periods = new ArrayList<>();
 
     public void addEmploymentPeriod(Period period) {
         periods.add(period);
@@ -28,17 +24,20 @@ public class EmploymentPeriod {
 
     public Period getPeriodBetweenDates(LocalDate fromDate, LocalDate toDate) {
         if (fromDate == null || toDate == null) {
-            throw new NullPointerException("Date is null");
+            throw new NullPointerException("Null parameters are not allowed!");
         }
         return Period.between(fromDate, toDate).normalized();
     }
 
     public Period getPeriodBetweenDates(String fromDate, String toDate, String pattern) {
-        if (fromDate.isBlank() || toDate.isBlank()) {
-            throw new IllegalArgumentException("Date is blank");
+        if (fromDate.isBlank()) {
+            throw new IllegalArgumentException("Empty from date string, cannot use: " + fromDate);
+        }
+        if (toDate.isBlank()) {
+            throw new IllegalArgumentException("Empty to date string, cannot use: " + toDate);
         }
         if (pattern.isBlank()) {
-            throw new IllegalArgumentException("Pattern is blank");
+            throw new IllegalArgumentException("Empty pattern string, cannot use: " + pattern);
         }
         LocalDate from = LocalDate.parse(fromDate, DateTimeFormatter.ofPattern(pattern));
         LocalDate to = LocalDate.parse(toDate, DateTimeFormatter.ofPattern(pattern));
