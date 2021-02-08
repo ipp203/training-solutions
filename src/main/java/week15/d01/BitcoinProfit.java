@@ -23,6 +23,12 @@ public class BitcoinProfit {
         return profit;
     }
 
+    public void setNewValues(int buyDay, int saleDay, int profit) {
+        this.buyDay = buyDay;
+        this.saleDay = saleDay;
+        this.profit = profit;
+    }
+
     @Override
     public String toString() {
         return  "buyDay=" + buyDay +
