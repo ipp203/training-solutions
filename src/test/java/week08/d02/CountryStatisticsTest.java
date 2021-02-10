@@ -10,7 +10,7 @@ class CountryStatisticsTest {
     void loadData() {
         CountryStatistics cs = new CountryStatistics();
 
-        cs.readCountryData("country.txt");
+        cs.readCountryData("countries.txt");
         assertEquals(11, cs.getCountryData().size());
 
     }
@@ -19,7 +19,7 @@ class CountryStatisticsTest {
     void getLargestPopulation() {
         CountryStatistics cs = new CountryStatistics();
 
-        cs.readCountryData("country.txt");
+        cs.readCountryData("countries.txt");
 
         assertEquals(79, cs.maxPopulation().getPopulation());
     }

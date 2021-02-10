@@ -8,8 +8,6 @@
     <artifactId>training-solutions</artifactId>
     <version>1.0-SNAPSHOT</version>
 
-
-
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>15</maven.compiler.source>
@@ -20,8 +18,25 @@
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
-            <version>5.7.0</version>
+            <version>5.7.1</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
+
+    <!-- maven kihagyja a teszteket
+     tesztesetben ha egy osztaly peldanyositasa az attributumok megadasi helyen van, maven rosszul mukodik
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.12.4</version>
+                <configuration>
+                    <skipTests>true</skipTests>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+-->
+
 </project>

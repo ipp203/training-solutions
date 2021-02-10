@@ -35,7 +35,7 @@ public class DatabaseConfigurationTest {
 
     @Test
     public void testExternalFile() throws IOException {
-        File file = new File(folder, "test.txt");
+        File file = new File(folder, "testDatabase.txt");
         try (
                 PrintWriter printWriter = new PrintWriter(file, "UTF-8");
         ) {

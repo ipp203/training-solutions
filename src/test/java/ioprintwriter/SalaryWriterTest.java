@@ -21,7 +21,7 @@ public class SalaryWriterTest {
 
     @Test
     public void testWriteNamesAndSalaries() throws IOException {
-        Path file = new File(folder, "test.txt").toPath();
+        Path file = new File(folder, "testSalary.txt").toPath();
         sw.writeNamesAndSalaries(file);
         List<String> writtenLines = Files.readAllLines(file);
 

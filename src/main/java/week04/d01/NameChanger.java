@@ -6,7 +6,7 @@ public class NameChanger {
 
     public NameChanger(String fullname) {
         if (fullname == null || fullname.isBlank()) {
-            throw new IllegalArgumentException("Invalid name: " + fullname);
+            throw new IllegalArgumentException("Invalid name:" + fullname);
         }
         this.fullname = fullname.trim();
     }
