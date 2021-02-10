@@ -17,28 +17,8 @@ public class Post {
         this.owner = owner;
     }
 
-    public String getTitle() {
-        return title;
-    }
-
-    public LocalDate getPublishedAt() {
-        return publishedAt;
-    }
-
-    public LocalDate getDeletedAt() {
-        return deletedAt;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public String getOwner() {
-        return owner;
-    }
-
     public boolean isContentOrTitleNotEmpty() {
-        return !(content.isEmpty() || title.isEmpty());
+        return !(content.isBlank() || title.isBlank());
     }
 
     public boolean isOwnPost(String user) {

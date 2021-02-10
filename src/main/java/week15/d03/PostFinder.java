@@ -7,17 +7,19 @@ import java.util.stream.Collectors;
 public class PostFinder {
     private List<Post> posts;
 
-    public PostFinder(List<week15.d03.Post> posts) {
+    public PostFinder(List<Post> posts) {
+        if (posts == null){
+            throw new IllegalArgumentException("Argument can not be null!");
+        }
         this.posts = new ArrayList<>(posts);
     }
 
     public List<Post> findPosts(String user) {
-        List<Post> result = posts.stream()
+        return posts.stream()
                 .filter(Post::isContentOrTitleNotEmpty)
                 .filter(post -> post.isEarlierThanNow() || post.isOwnPost(user))
                 .filter(Post::isNotDeleted)
                 .collect(Collectors.toList());
-        return result;
     }
 
 /*
