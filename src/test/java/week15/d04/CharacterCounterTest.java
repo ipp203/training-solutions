@@ -12,6 +12,7 @@ class CharacterCounterTest {
     void countChar() {
         CharacterCounter cc = new CharacterCounter();
         Map<CharType, Long> result = cc.countChar("src/test/resources/week15/d04/text.txt");
+        // Map<CharType, Long> result = cc.countChar("text.txt");
         Map<CharType, Long> control = Map.of(
                 CharType.VOWEL, 873L,
                 CharType.OTHER, 246L,

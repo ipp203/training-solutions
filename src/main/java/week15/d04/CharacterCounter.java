@@ -1,6 +1,7 @@
 package week15.d04;
 
-import java.io.IOException;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Map;
@@ -15,6 +16,8 @@ public class CharacterCounter {
     public Map<CharType, Long> countChar(String file) {
         try (Stream<String> stream = Files.lines(Path.of(file))) {
 
+//        try (InputStream is = CharacterCounter.class.getResourceAsStream(file)) {
+//            Stream<String> stream = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8)).lines();
             return stream.map(String::toLowerCase)
                     .flatMapToInt(String::chars)
                     .filter(i -> i != CODE_OF_SPACE)
