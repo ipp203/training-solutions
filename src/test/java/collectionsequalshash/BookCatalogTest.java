@@ -11,20 +11,20 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class BookCatalogTest {
 
     private static final Book[] books = new Book[]{
-            new Book("1212", "Egri Csillagok", "G·rdonyi GÈza"),
-            new Book("2121", "Vuk", "Fekete Istv·n"),
-            new Book("4545", "Rab R·by", "JÛkai MÛr")
+            new Book("1212", "Egri Csillagok", "G√°rdonyi G√©za"),
+            new Book("2121", "Vuk", "Fekete Istv√°n"),
+            new Book("4545", "Rab R√°by", "J√≥kai M√≥r")
     };
 
     @Test
     public void findSelectedBookInBookList() {
         //When
-        Book foundBook = new BookCatalog().findBookByTitleAuthor(Arrays.asList(books), "Vuk", "Fekete Istv·n");
+        Book foundBook = new BookCatalog().findBookByTitleAuthor(Arrays.asList(books), "Vuk", "Fekete Istv√°n");
         //Then
         assertEquals("2121", foundBook.getRegNumber());
-        assertEquals("Fekete Istv·n", foundBook.getAuthor());
+        assertEquals("Fekete Istv√°n", foundBook.getAuthor());
         assertEquals("Vuk", foundBook.getTitle());
-        assertEquals("Book{regNumber='2121', title='Vuk', author='Fekete Istv·n'}", foundBook.toString());
+        assertEquals("Book{regNumber='2121', title='Vuk', author='Fekete Istv√°n'}", foundBook.toString());
     }
 
     @Test
@@ -37,7 +37,7 @@ public class BookCatalogTest {
     @Test
     public void findSelectedBookInSearchableBookList() {
         //Given
-        Book searchingFor = new Book("2121", "Vuk", "Fekete Istv·n");
+        Book searchingFor = new Book("2121", "Vuk", "Fekete Istv√°n");
         //When
         Book foundBook = new BookCatalog().findBook(Arrays.asList(books), searchingFor);
         //Then
@@ -46,7 +46,7 @@ public class BookCatalogTest {
 
     @Test
     public void selectedBookIsNotInBookList() {
-        Book searchingFor = new Book("2121", "Vuk", "Istv·n");
+        Book searchingFor = new Book("2121", "Vuk", "Istv√°n");
 
         Book foundBook = new BookCatalog().findBook(Arrays.asList(books), searchingFor);
 
@@ -56,7 +56,7 @@ public class BookCatalogTest {
     @Test
     public void findBookByTitleAndAuthor() {
         //Given
-        Book searchingFor = new Book("Vuk", "Fekete Istv·n");
+        Book searchingFor = new Book("Vuk", "Fekete Istv√°n");
         //When
         Book foundBook = new BookCatalog().findBook(Arrays.asList(books), searchingFor);
         //Then
@@ -67,9 +67,9 @@ public class BookCatalogTest {
     public void addSameBooksToSet() {
         //Given
         Book[] sameBooks = new Book[]{
-                new Book("1212", "Egri Csillagok", "G·rdonyi GÈza"),
-                new Book("1212", "Egri Csillagok", "G·rdonyi GÈza"),
-                new Book("1212", "Egri Csillagok", "G·rdonyi GÈza")
+                new Book("1212", "Egri Csillagok", "G√°rdonyi G√©za"),
+                new Book("1212", "Egri Csillagok", "G√°rdonyi G√©za"),
+                new Book("1212", "Egri Csillagok", "G√°rdonyi G√©za")
         };
         //When
         Set<Book> bookSet = new BookCatalog().addBooksToSet(sameBooks);
