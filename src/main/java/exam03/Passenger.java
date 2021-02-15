@@ -1,8 +1,8 @@
 package exam03;
 
 public class Passenger {
-    private String name;
-    private CruiseClass cruiseClass;
+    private final String name;
+    private final CruiseClass cruiseClass;
 
     public Passenger(String name, CruiseClass cruiseClass) {
         this.name = name;
