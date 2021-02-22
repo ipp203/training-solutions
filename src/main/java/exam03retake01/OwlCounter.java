@@ -7,7 +7,7 @@ import java.util.Map;
 
 public class OwlCounter {
 
-    Map<String, Integer> owls = new HashMap<>();
+    private Map<String, Integer> owls = new HashMap<>();
 
     public void readFromFile(BufferedReader reader) {
         try (reader) {
