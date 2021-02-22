@@ -21,7 +21,7 @@ class PostFinderTest {
 
         PostFinder postFinder = new PostFinder(testData);
         List<Post> result = postFinder.findPosts("Pista");
-        assertEquals(2,result.size());
+        assertEquals(3, result.size());
     }
 
     @Test
