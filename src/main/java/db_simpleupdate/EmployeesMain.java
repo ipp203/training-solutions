@@ -18,6 +18,11 @@ public class EmployeesMain {
             throw new IllegalStateException("Can not create data source", se);
         }
 
+        EmployeesDao employeesDao = new EmployeesDao(dataSource);
+        employeesDao.createEmployee("John Doe");
+        System.out.println(employeesDao.findEmployeeNameById(1));
+
+/*
 //insert Connection es PreparedStatement
         for (int i = 0; i < 100; i++) {
             try (Connection conn = dataSource.getConnection();
@@ -49,7 +54,7 @@ public class EmployeesMain {
             }
         } catch (SQLException se) {
             throw new IllegalStateException("Can not query", se);
-        }
+        }*/
 
     }
 }

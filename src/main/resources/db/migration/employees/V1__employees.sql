@@ -1,0 +1,4 @@
+CREATE TABLE if NOT EXISTS employees (
+    id INT(10) AUTO_INCREMENT PRIMARY KEY,
+    emp_name VARCHAR(255)
+);
