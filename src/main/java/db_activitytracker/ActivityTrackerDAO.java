@@ -2,7 +2,6 @@ package db_activitytracker;
 
 import org.mariadb.jdbc.MariaDbDataSource;
 
-import javax.sql.DataSource;
 import java.sql.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;

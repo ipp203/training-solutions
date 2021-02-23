@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 import org.mariadb.jdbc.MariaDbDataSource;
 
 import java.sql.SQLException;
-import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -26,7 +25,7 @@ class ActivityTrackerDAOTest {
             throw new IllegalStateException("Can not create datasource " + sqle.getMessage(), sqle);
         }
 
-        Flyway flyway = Flyway.configure().dataSource(dataSource).load();
+        Flyway flyway = Flyway.configure().locations("db/migration/activitytracker").dataSource(dataSource).load();
         flyway.clean();
         flyway.migrate();
 
