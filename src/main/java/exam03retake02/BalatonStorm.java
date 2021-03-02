@@ -70,31 +70,37 @@ public class BalatonStorm {
 
     private void readFile(BufferedReader reader) {
         try (reader) {
-            String line;
-            String[] data = new String[STORM_STATION_LINE_NUMBER];
-            int counter = 0;
-
-            while ((line = reader.readLine()) != null) {
-                if (line.contains(":")) {
-                    if (counter < STORM_STATION_LINE_NUMBER) {
-                        data[counter] = line;
-                    }
-                    counter++;
-                } else {
-                    if (counter == STORM_STATION_LINE_NUMBER) {
-                        saveToDb(new StormData(data));
-                    }
-                    counter = 0;
-                }
-            }
+            processFile(reader);
         } catch (IOException e) {
             throw new IllegalArgumentException("Can not read file", e);
         }
     }
 
+    private void processFile(BufferedReader reader) throws IOException {
+        String line;
+        String[] data = new String[STORM_STATION_LINE_NUMBER];
+        int counter = 0;
+
+        while ((line = reader.readLine()) != null) {
+            if (line.contains(":")) {
+                if (counter < STORM_STATION_LINE_NUMBER) {
+                    data[counter] = line;
+                }
+                counter++;
+            } else {
+                if (counter == STORM_STATION_LINE_NUMBER) {
+                    saveToDb(new StormData(data));
+                }
+                counter = 0;
+            }
+        }
+    }
+
     private void saveToDb(StormData stormData) {
         try (Connection conn = dataSource.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement("INSERT INTO balatonstorm VALUES(?,?,?,?,?,?,?,?)")) {
+             PreparedStatement pstmt = conn.prepareStatement(
+                     "INSERT  INTO balatonstorm (id, station, lat, lng, description, level, group_id, station_type) " +
+                             "VALUES(?,?,?,?,?,?,?,?)")) {
 
             pstmt.setLong(1, stormData.getId());
             pstmt.setString(2, stormData.getStation());

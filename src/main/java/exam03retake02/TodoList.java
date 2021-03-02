@@ -25,10 +25,11 @@ public class TodoList {
     }
 
     public List<String> getMostImportantTodosText() {
+        int minPriority = todos.stream()
+                .mapToInt(Todo::getPriority)
+                .min().getAsInt();
         return todos.stream()
-                .filter(todo -> todo.getPriority() == todos.stream()
-                        .mapToInt(Todo::getPriority)
-                        .min().getAsInt())
+                .filter(todo -> todo.getPriority() == minPriority)
                 .map(Todo::getText)
                 .collect(Collectors.toList());
     }
