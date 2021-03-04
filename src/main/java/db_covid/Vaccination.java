@@ -24,11 +24,11 @@ public class Vaccination {
         }
     }
 
-    private int citizenId;
-    private LocalDate vacDate;
-    private VaccinationStatus status;
-    private String note;
-    private VaccinationType type;
+    private final int citizenId;
+    private final LocalDate vacDate;
+    private final VaccinationStatus status;
+    private final String note;
+    private final VaccinationType type;
 
     public Vaccination(int citizenId, LocalDate vacDate, VaccinationStatus status, String note, VaccinationType type) {
         this.citizenId = citizenId;

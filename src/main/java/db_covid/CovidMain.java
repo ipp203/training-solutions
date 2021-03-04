@@ -6,7 +6,9 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.sql.Connection;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -17,10 +19,10 @@ import java.util.function.IntFunction;
 
 public class CovidMain {
 
-    private Scanner scn;
-    private MariaDbDataSource dataSource;
-    private CitizenService citizenService;
-    private VaccinationService vaccinationService;
+    private final Scanner scn;
+    private final MariaDbDataSource dataSource;
+    private final CitizenService citizenService;
+    private final VaccinationService vaccinationService;
 
     private static final String MAIN_MENU = """
               Válasszon menüpontot!
@@ -36,17 +38,34 @@ public class CovidMain {
     public CovidMain(Scanner scn) {
         this.scn = scn;
 
+//        try {
+//            dataSource = new MariaDbDataSource("jdbc:mariadb://localhost:3306/covid?useUnicode=true");
+//            dataSource.setUser("covid");
+//            dataSource.setPassword("covid");
+//        } catch (
+//                SQLException e) {
+//            throw new IllegalStateException("Cannot create datasource", e);
+//        }
+
         try {
-            dataSource = new MariaDbDataSource("jdbc:mariadb://localhost:3306/covid?useUnicode=true");
+            dataSource = new MariaDbDataSource("jdbc:mariadb://localhost:3306/");
             dataSource.setUser("covid");
             dataSource.setPassword("covid");
-        } catch (
-                SQLException e) {
+        } catch (SQLException e) {
             throw new IllegalStateException("Cannot create datasource", e);
         }
+
+        try (Connection conn = dataSource.getConnection();
+             Statement stmt = conn.createStatement()) {
+            stmt.executeQuery("CREATE DATABASE if NOT EXISTS covid");
+            dataSource.setUrl("jdbc:mariadb://localhost:3306/covid?useUnicode=true");
+        } catch (SQLException sqle) {
+            throw new IllegalStateException("Cannot create datasource", sqle);
+        }
+
         citizenService = new CitizenService(dataSource);
         vaccinationService = new VaccinationService(dataSource);
-
+        new ZipCodeDao(dataSource).createTableAndUploadData();
     }
 
     private void registerCitizen() {
@@ -202,27 +221,27 @@ public class CovidMain {
     private LocalDate getDate() {
         LocalDate date = Citizen.DEFAULT_DATE;
         System.out.println("Adja meg a dátumot éééé.hh.nn formátumban!");
-        boolean succesInput = false;
+        boolean successInput = false;
         do {
             try {
                 String dateString = scn.nextLine();
                 date = LocalDate.parse(dateString, DateTimeFormatter.ofPattern("yyyy.MM.dd"));
-                succesInput = true;
+                successInput = true;
             } catch (DateTimeParseException dtpe) {
                 System.out.println("Nem megfelelő formátum. Próbálja újra (éééé.hh.nn)!");
             }
-        } while (!succesInput);
+        } while (!successInput);
         return date;
     }
 
     private String getZipCode() {
         String zipCode;
         System.out.println("Adja meg az irányítószámot!");
-        BoolString succesInput;
+        BoolString successInput;
         do {
             zipCode = scn.nextLine();
-            succesInput = Citizen.isZipCodeValid(zipCode, dataSource);
-        } while (!succesInput.getQual());
+            successInput = Citizen.isZipCodeValid(zipCode, dataSource);
+        } while (!successInput.getQual());
         return zipCode;
     }
 
@@ -302,6 +321,7 @@ public class CovidMain {
         Map<Integer, Integer> result = citizenService.getVaccinatedReportByZipCode(zipCode);
         StringBuilder keys = new StringBuilder(String.format("%16s", "Oltások száma"));
         StringBuilder values = new StringBuilder(String.format("%16s", "Oltottak száma"));
+
         for (Map.Entry<Integer, Integer> entry : result.entrySet()) {
             keys.append(String.format("%5d", entry.getKey()));
             values.append(String.format("%5d", entry.getValue()));
@@ -313,19 +333,19 @@ public class CovidMain {
 
     private int getSelector(int min, int max) {
         int selector = 0;
-        boolean succesInput = false;
+        boolean successInput = false;
         do {
             String temp = scn.nextLine();
             try {
                 selector = Integer.parseInt(temp);
-                succesInput = selector >= min && selector <= max;
-                if (!succesInput) {
+                successInput = selector >= min && selector <= max;
+                if (!successInput) {
                     System.out.printf("%d - %d közötti számot válasszon!%n", min, max);
                 }
             } catch (NumberFormatException nfe) {
                 System.out.printf("%d - %d közötti számot válasszon!%n", min, max);
             }
-        } while (!succesInput);
+        } while (!successInput);
         return selector;
     }
 
@@ -357,6 +377,7 @@ public class CovidMain {
                 cm.printReport();
             }
         } while (selector != 7);
+        System.out.println("Jó egészséget!");
     }
 
 

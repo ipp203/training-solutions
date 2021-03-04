@@ -17,14 +17,15 @@ import java.util.stream.Collectors;
 public class CitizenService {
 
 
-    private List<Citizen> citizenList = new ArrayList<>();
-    private MariaDbDataSource dataSource;
-    private CitizensDao citizensDao;
+    private final List<Citizen> citizenList = new ArrayList<>();
+    private final MariaDbDataSource dataSource;
+    private final CitizensDao citizensDao;
 
 
     public CitizenService(MariaDbDataSource dataSource) {
         this.dataSource = dataSource;
         citizensDao = new CitizensDao(dataSource);
+        citizensDao.createTables();
     }
 
     public List<Citizen> getCitizenList() {

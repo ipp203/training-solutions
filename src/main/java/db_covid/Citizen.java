@@ -3,7 +3,6 @@ package db_covid;
 import org.mariadb.jdbc.MariaDbDataSource;
 
 import java.time.LocalDate;
-import java.util.Objects;
 
 public class Citizen {
     private static final int MIN_AGE = 10;
@@ -14,31 +13,28 @@ public class Citizen {
     public static final String THANK_YOU = "Köszönöm.";
     public static final LocalDate DEFAULT_DATE = LocalDate.of(1980, 1, 1);
 
-    private int citizenId;
+    private final int citizenId;
     private final String name;
     private final String email;
     private final int age;
     private final String zipCode;
     private final String socialSecurityNumber;
-    private int numberOfVaccination;
-    private LocalDate lastVaccination;
+    private final int numberOfVaccination;
+    private final LocalDate lastVaccination;
 
-    public Citizen(String name, String email, int age, String zipCode, String socialSecurityNumber) {
+    public Citizen(int citizenId, String name, String email, int age, String zipCode, String socialSecurityNumber, int numberOfVaccination, LocalDate lastVaccination) {
+        this.citizenId = citizenId;
         this.name = name;
         this.email = email;
         this.age = age;
         this.zipCode = zipCode;
         this.socialSecurityNumber = socialSecurityNumber;
-        numberOfVaccination = 0;
-        lastVaccination = null;
-        citizenId = 0;
-    }
-
-    public Citizen(int id, String name, String email, int age, String zipCode, String socialSecurityNumber, int numberOfVaccination, LocalDate lastVaccination) {
-        this(name, email, age, zipCode, socialSecurityNumber);
         this.numberOfVaccination = numberOfVaccination;
         this.lastVaccination = lastVaccination;
-        citizenId = id;
+    }
+
+    public Citizen(String name, String email, int age, String zipCode, String socialSecurityNumber) {
+        this(0, name, email, age, zipCode, socialSecurityNumber, 0, null);
     }
 
     public int getId() {
@@ -155,25 +151,6 @@ public class Citizen {
                 Citizen.isEmailValid(citizen.email).getQual() &&
                 Citizen.isZipCodeValid(citizen.zipCode, dataSource).getQual() &&
                 Citizen.isSocialSecurityNumberValid(citizen.socialSecurityNumber).getQual();
-    }
-
-    public void setVaccination(LocalDate dateTime) {
-        numberOfVaccination++;
-        lastVaccination = dateTime;
-    }
-
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Citizen citizen = (Citizen) o;
-        return socialSecurityNumber.equals(citizen.socialSecurityNumber);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(socialSecurityNumber);
     }
 
     @Override

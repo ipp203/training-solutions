@@ -10,6 +10,8 @@ import java.util.*;
 public class CitizensDao {
 
     public static final int CITIZENS_COLUMN_NUMBER = 8;
+    public static final String CAN_NOT_CONNECT_TO_DATABASE = "Can not connect to database";
+
     MariaDbDataSource dataSource;
 
     public CitizensDao(MariaDbDataSource dataSource) {
@@ -62,10 +64,11 @@ public class CitizensDao {
             return getCitizenOptional(pstmt);
 
         } catch (SQLException sqle) {
-            throw new IllegalStateException("Can not connect to database", sqle);
+            throw new IllegalStateException(CAN_NOT_CONNECT_TO_DATABASE, sqle);
         }
     }
 
+    //csak teszthez
     public List<Citizen> getCitizens() {
         try (Connection conn = dataSource.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(
@@ -86,7 +89,7 @@ public class CitizensDao {
             }
             return result;
         } catch (SQLException sqle) {
-            throw new IllegalStateException("Can not connect to database", sqle);
+            throw new IllegalStateException(CAN_NOT_CONNECT_TO_DATABASE, sqle);
         }
     }
 
@@ -167,6 +170,35 @@ public class CitizensDao {
         }
     }
 
+    public void createTables() {
+        try (Connection conn = dataSource.getConnection();
+
+             Statement stmt = conn.createStatement()) {
+
+            stmt.executeUpdate("CREATE TABLE if NOT EXISTS citizens(" +
+                    "    citizen_id INT AUTO_INCREMENT PRIMARY KEY, " +
+                    "    citizen_name VARCHAR(128) NOT NULL, " +
+                    "    zip_code VARCHAR(4) NOT NULL, " +
+                    "    age INT(3), " +
+                    "    email VARCHAR(128) NOT NULL, " +
+                    "    ssn VARCHAR(9) NOT NULL UNIQUE, " +
+                    "    number_of_vaccination INT(1), " +
+                    "    last_vaccination DATE)");
+
+            stmt.executeUpdate("CREATE TABLE if NOT EXISTS vaccinations(" +
+                    "    vaccination_id INT AUTO_INCREMENT PRIMARY KEY, " +
+                    "    citizen_id INT NOT NULl, " +
+                    "    vaccination_date DATE NOT NULL, " +
+                    "    status VARCHAR(16), " +
+                    "    note VARCHAR(200), " +
+                    "    vaccination_type VARCHAR(20), " +
+                    "    CONSTRAINT FOREIGN KEY (citizen_id) REFERENCES citizens(citizen_id))");
+
+        } catch (SQLException sqle) {
+            throw new IllegalStateException("Can not create citizens and vaccination table ", sqle);
+        }
+    }
+
     /////Vaccination
 
     public void saveVaccination(Vaccination vaccination) {
@@ -180,7 +212,7 @@ public class CitizensDao {
             conn.commit();
 
         } catch (SQLException sqle) {
-            throw new IllegalStateException("Can not connect to database", sqle);
+            throw new IllegalStateException(CAN_NOT_CONNECT_TO_DATABASE, sqle);
         }
     }
 

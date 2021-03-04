@@ -1,8 +1,8 @@
 package db_covid;
 
 public class BoolString {
-    private boolean qual;
-    private String message;
+    private final boolean qual;
+    private final String message;
 
     public BoolString(boolean qual, String message) {
         this.qual = qual;

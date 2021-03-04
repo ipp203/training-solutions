@@ -3,11 +3,9 @@ package db_covid;
 import org.mariadb.jdbc.MariaDbDataSource;
 
 public class VaccinationService {
-    private CitizensDao cd;
-    private MariaDbDataSource dataSource;
+    private final CitizensDao cd;
 
     public VaccinationService(MariaDbDataSource dataSource) {
-        this.dataSource = dataSource;
         cd = new CitizensDao(dataSource);
     }
 
