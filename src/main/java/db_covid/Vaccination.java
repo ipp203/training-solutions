@@ -43,7 +43,7 @@ public class Vaccination {
     }
 
     public static Vaccination ofWithFailed(int citizenId, LocalDate failedDate, String note) {
-        return new Vaccination(citizenId, failedDate, VaccinationStatus.VACCINATED, note, VaccinationType.NONE);
+        return new Vaccination(citizenId, failedDate, VaccinationStatus.FAILED, note, VaccinationType.NONE);
     }
 
     public int getCitizenId() {

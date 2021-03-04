@@ -190,6 +190,7 @@ public class CovidMain {
         } catch (IOException ioe) {
             throw new IllegalStateException("A fájl olvasása nem sikerült", ioe);
         }
+
     }
 
 
@@ -318,13 +319,17 @@ public class CovidMain {
 
     private void printReport() {
         String zipCode = getZipCode();
-        Map<Integer, Integer> result = citizenService.getVaccinatedReportByZipCode(zipCode);
+        Map<Integer, Integer> resultMap = citizenService.getVaccinatedReportByZipCode(zipCode);
         StringBuilder keys = new StringBuilder(String.format("%16s", "Oltások száma"));
         StringBuilder values = new StringBuilder(String.format("%16s", "Oltottak száma"));
 
-        for (Map.Entry<Integer, Integer> entry : result.entrySet()) {
-            keys.append(String.format("%5d", entry.getKey()));
-            values.append(String.format("%5d", entry.getValue()));
+        for (int i = 0; i < 3; i++) {
+            keys.append(String.format("%5d", i));
+            if (resultMap.containsKey(i)) {
+                values.append(String.format("%5d", resultMap.get(i)));
+            } else {
+                values.append(String.format("%5d", 0));
+            }
         }
 
         System.out.println(keys.toString());
